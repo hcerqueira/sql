@@ -1,0 +1,28 @@
+SELECT * FROM TAB_REQUISICAO_PECA
+WHERE cd_requisicao = 931195
+
+SELECT * FROM TAB_REQUISICAO_PECA
+WHERE cd_requisicao = 932628
+
+BEGIN TRAN
+
+UPDATE TAB_REQUISICAO_PECA 
+SET ST_REQUISICAO = 5, MATR_RESP_RECEBIMENTO = 350323, DT_RECEBIMENTO = '26/10/2019'
+WHERE cd_requisicao = 931195
+
+UPDATE TAB_REQUISICAO_PECA 
+SET ST_REQUISICAO = 5, MATR_RESP_RECEBIMENTO = 350323, DT_RECEBIMENTO = '10/11/2019'
+WHERE cd_requisicao = 932628
+
+--ROLLBACK
+--COMMIT 
+
+_______________________________________________________________________________________________________
+
+Encontrar a garantia do pedido 
+
+select num_pedido, DT_ABERTURA_PEDIDO from TAB_PEDIDO PED
+inner join  TAB_ITENS_FORMA_PAGTO_PEDIDO IFPP on PED.NUM_ORCAMENTO = IFPP.num_orcamento
+where PED.cd_unidade_expedicao = 18
+and IFPP.vl_pago = 208.05
+order by PED.DT_ABERTURA_PEDIDO desc
